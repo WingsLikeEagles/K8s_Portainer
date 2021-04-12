@@ -12,6 +12,14 @@ This is designed to be run on a single computer or laptop.  In order for this to
   - Not sure here, but I would assume at least one (1) core for each node and one (1) for Portainer and registry containers.
   - Total: 8 cores (4 cores for the nodes and containers, doubled for matching host resources)
 
+## Install VirtualBox
+The nodes will each run as a separate VM on the host.  VirtualBox (or VMWare Workstaion) is used to provide this capability.  
+
+## Download and install the base Linux OS for the nodes
+I am experimenting with CentOS Core.  Or CentOS Atomic.  
+https://www.projectatomic.io/docs/kubernetes/  
+https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster  
+
 ## Install Docker, local Registry, and Portainer-CE
 - Install Docker
   -  For Windows be sure to install the Linux subsystem (WSL)  
