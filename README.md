@@ -1,6 +1,17 @@
 # K8s_Portainer
 Installing Kubernetes and using Portainer to interact.
 
+Hardware requirements:
+BLUF: 16 GB RAM and 8 cores  
+This is designed to be run on a single computer or laptop.  In order for this to work with several nodes the computer needs to have better than average resources.  Keep in mind, using VM's you only want to utilize about half of the system resources to leave resources for the host OS and hyervisor to work smoothly.  I recommend the following:  
+- RAM
+  - In this design each node will consume 2 GB.  If you have a Master, and 2 worker nodes that is 6 GB.
+  - 2 GB will be needed for the Portainer and local registry.
+  - Total: 16 GB (8 GB for nodes and resources, double this to get host resource requirement of 16 GB)
+- CPU
+  - Not sure here, but I would assume at least one (1) core for each node and one (1) for Portainer and registry containers.
+  - Total: 8 cores (4 cores for the nodes and containers, doubled for matching host resources)
+
 ## Install Docker, local Registry, and Portainer-CE
 - Install Docker
   -  For Windows be sure to install the Linux subsystem (WSL)  
