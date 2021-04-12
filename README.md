@@ -74,7 +74,7 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
 - Create a New VM in VirtualBox using the CentOS Core ISO downloaded earlier (2 GB RAM, Internal Network same as Reg.local)
 - Edit /etc/hosts file adding `192.168.123.101 reg reg.local` (use IP address from Internal NIC on Local Registry VM created earlier)
 - Add Insecure Registries setting to Docker Engine config
-  - ```{
+```{
   "insecure-registries" : ["reg.local:5000"]
 }```
 - Continue
