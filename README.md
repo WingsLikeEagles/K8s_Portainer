@@ -31,14 +31,20 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
 - Install Docker
   -  For Windows be sure to install the Linux subsystem (WSL)  
   -  For Linux, you can follow my steps for CentOS 7 here https://github.com/WingsLikeEagles/Docker_Portainer_setup
-- Install a local docker registry  
+- Spin up the Registry VM and Install a local docker registry  
+  - Using the CentOS Core ISO file, create a new VM
+    - This VM will have an outward facing Network interface and an internal one
+      - This is not required if you manually copy the containers to the VM
+      - Add an additional NIC for Internet access to download containers
   - `docker pull registry:2.7.1`  
   - `docker volume create registry_data`  
-  - `docker run -d -p 5000:5000 --restart always -v registry_data:/var/lib/registry --name registry registry:2.7.1`  
+  - `docker run -d -p 5000:5000 --restart always -v registry_data:/var/lib/registry --name registry registry:2.7.1`
+  - Edit the /etc/hosts file  
+    - add `192.168.123.101 reg reg.local` use your appropriate IP
 - Install Portainer-CE  
   - `docker pull portainer/portainer-ce:2.1.1`  
-  - `docker tag portainer/portainer-ce:2.1.1 localhost:5000/portainer-ce:2.1.1`  
-  - `docker push localhost:5000/portainer-ce:2.1.1`  
+  - `docker tag portainer/portainer-ce:2.1.1 re.local:5000/portainer-ce:2.1.1`  
+  - `docker push reg.local:5000/portainer-ce:2.1.1`  
   - `docker volume create portainer_data`  
   - Portainer needs to be able to access the Docker engine socket to control and monitor the containers:  
     - `docker run -d -p 9000:9000 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data localhost:5000/portainer-ce:2.1.1`  
