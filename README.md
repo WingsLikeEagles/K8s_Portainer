@@ -31,7 +31,7 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
 - Install Docker
   -  For Windows be sure to install the Linux subsystem (WSL)  
   -  For Linux, you can follow my steps for CentOS 7 here https://github.com/WingsLikeEagles/Docker_Portainer_setup
-- Spin up the Registry VM and Install a local docker registry  
+- Spin up the Registry VM and Install a local docker registry (2 GB RAM, create an Internal Network)
   - Using the CentOS Core ISO file, create a new VM
     - This VM will have an outward facing Network interface and an internal one
       - This is not required if you manually copy the containers to the VM
@@ -40,10 +40,10 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - `docker volume create registry_data`  
   - `docker run -d -p 5000:5000 --restart always -v registry_data:/var/lib/registry --name registry registry:2.7.1`
   - Edit the /etc/hosts file  
-    - add `192.168.123.101 reg reg.local` use your appropriate IP
+    - add `192.168.123.101 reg reg.local` use your appropriate IP for your Local registry VM (this one we just created)
 - Install Portainer-CE  
   - `docker pull portainer/portainer-ce:2.1.1`  
-  - `docker tag portainer/portainer-ce:2.1.1 re.local:5000/portainer-ce:2.1.1`  
+  - `docker tag portainer/portainer-ce:2.1.1 reg.local:5000/portainer-ce:2.1.1`  
   - `docker push reg.local:5000/portainer-ce:2.1.1`  
   - `docker volume create portainer_data`  
   - Portainer needs to be able to access the Docker engine socket to control and monitor the containers:  
@@ -70,4 +70,11 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - `docker tag registry.centos.org/centos/kubernetes-scheduler reg.local:5000/centos/kubernetes-scheduler:latest`
   - `docker push reg.local:5000/centos/kubernetes-scheduler:latest`
 
-## More to come!
+## Master Node
+- Create a New VM in VirtualBox using the CentOS Core ISO downloaded earlier (2 GB RAM, Internal Network same as Reg.local)
+- Edit /etc/hosts file adding `192.168.123.101 reg reg.local` (use IP address from Internal NIC on Local Registry VM created earlier)
+- Add Insecure Registries setting to Docker Engine config
+  - ```{
+  "insecure-registries" : ["reg.local:5000"]
+}```
+- Continue
