@@ -85,4 +85,8 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - `  "insecure-registries" : ["reg.local:5000"]`
   - `}`
   - Restart the Docker Engine service `systemctl restart docker`
+- Pull the required containers to your Master Node from your local Registry VM
+  - `docker pull reg.local:5000/centos/kubernetes-apiserver:latest`
+  - `docker pull reg.local:5000/centos/kubernetes-controller-manager:latest`
+  - `docker pull reg.local:5000/centos/kubernetes-scheduler:latest`
 - To Be Continued...
