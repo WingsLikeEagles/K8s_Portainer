@@ -89,4 +89,6 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - `docker pull reg.local:5000/centos/kubernetes-apiserver:latest`
   - `docker pull reg.local:5000/centos/kubernetes-controller-manager:latest`
   - `docker pull reg.local:5000/centos/kubernetes-scheduler:latest`
+- Add Kubernetes Containers as Services to Master Node
+  - https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
 - To Be Continued...
