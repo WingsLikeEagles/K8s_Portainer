@@ -11,6 +11,13 @@ This is designed to be run on a single computer or laptop.  In order for this to
 - CPU
   - Not sure here, but I would assume at least one (1) core for each node and one (1) for Portainer and registry containers.
   - Total: 8 cores (4 cores for the nodes and containers, doubled for matching host resources)
+- Disk Space
+  - Undefined at this point... count on at least 100 GB (maybe less? More?)
+  - Depends on what services you intend to run and how big their containers are.
+- For an Air Gapped environment:
+  - You will want a VM to run as a local registry for the docker containers for the Kubernetes nodes.
+  - Requires at least 512 MB of RAM and one (1) CPU core (probably small enough to not impact system)
+  - Only required during intsallation or updates (can be shut down after)???
 
 ## Install VirtualBox
 The nodes will each run as a separate VM on the host.  VirtualBox (or VMWare Workstaion) is used to provide this capability.  
@@ -40,5 +47,21 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - http://localhost:9000/  
   - Create the admin account and password.
   - Click on the left button to confirm you have linked the /var/run/docker.sock
+
+## Pull the required containers to your local registry
+- CentOS Atomic runs the Kebernetes Master node services as containers.  We need those images in our local registry!
+  - Based on https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster  
+- Kubernetes API Server
+  - `docker pull registry.centos.org/centos/kubernetes-apiserver`
+  - `docker tag registry.centos.org/centos/kubernetes-apiserver reg.local:5000/centos/kubernetes-apiserver:latest`
+  - `docker push reg.local:5000/centos/kubernetes-apiserver:latest`
+- Kubernetes Controller Master
+  - `docker pull registry.centos.org/centos/kubernetes-controller-manager`
+  - `docker tag registry.centos.org/centos/kubernetes-controller-manager reg.local:5000/centos/kubernetes-controller-manager:latest`
+  - `docker push reg.local:5000/centos/kubernetes-controller-manager:latest`
+- Kubernetes Scheduler
+  - `docker pull registry.centos.org/centos/kubernetes-scheduler`
+  - `docker tag registry.centos.org/centos/kubernetes-scheduler reg.local:5000/centos/kubernetes-scheduler:latest`
+  - `docker push reg.local:5000/centos/kubernetes-scheduler:latest`
 
 ## More to come!
