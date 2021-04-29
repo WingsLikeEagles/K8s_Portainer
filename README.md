@@ -81,9 +81,9 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
 - Edit /etc/hosts file adding `192.168.123.101 reg reg.local` (use IP address from Internal NIC on Local Registry VM created earlier)
 - Add Insecure Registries setting to Docker Engine config (this allows use without HTTPS since is is only local)
   - Edit `/etc/docker/daemon.json` to add the following:
-  - `{  
+  - ```{  
   "insecure-registries" : ["reg.local:5000"]  
-}`
+}```
   - Restart the Docker Engine service `systemctl restart docker`
 - Pull the required containers to your Master Node from your local Registry VM
   - `docker pull reg.local:5000/centos/kubernetes-apiserver:latest`
