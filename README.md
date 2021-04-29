@@ -91,4 +91,19 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - `docker pull reg.local:5000/centos/kubernetes-scheduler:latest`
 - Add Kubernetes Containers as Services to Master Node
   - https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
+- Add Services to /etc/systemd/system/ and enable them (still needs major work, these services assume K8s is installed locally on the host/VM which is not the case here)
+  - Clone this repo to the Master VM (or copy these files another way)
+  - Copy files from this repo etc/systemd/system/kube-* to /etc/systemd/system/
+  - chown and chmod the files
+    - chown root:root /etc/systemd/system/kube-*
+    - chmod 755 /etc/systemd/system/kube-*
+  - Enable the services to start at boot
+    - systemctl enable kube-apiserver.service
+    - systemctl enable kube-controller-manager.service
+    - systemctl enable kube-scheduler.service
+  - Start the services (this may need to happen later)
+    - systemctl start kube-apiserver.service
+    - systemctl start kube-controller-manager.service
+    - systemctl start kube-scheduler.service
+
 - To Be Continued...

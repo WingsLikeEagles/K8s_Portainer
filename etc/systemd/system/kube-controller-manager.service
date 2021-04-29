@@ -9,8 +9,8 @@ TimeoutStartSec=0
 Restart=always
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStartPre=/usr/bin/docker pull registry.centos.org/centos/kubernetes-controller-manager
-ExecStart=/usr/bin/docker run --rm --net=host -v /etc/kubernetes:/etc/kubernetes:z --name %n registry.centos.org/centos/kubernetes-controller-manager
+ExecStartPre=/usr/bin/docker pull reg.local:5000/centos/kubernetes-controller-manager
+ExecStart=/usr/bin/docker run --rm --net=host -v /etc/kubernetes:/etc/kubernetes:z --name %n reg.local:5000/centos/kubernetes-controller-manager
 
 [Install]
 WantedBy=multi-user.target
