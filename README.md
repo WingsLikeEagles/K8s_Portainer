@@ -41,11 +41,13 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - `docker run -d -p 5000:5000 --restart always -v registry_data:/var/lib/registry --name registry registry:2.7.1`
   - Edit the /etc/hosts file  
     - add `192.168.123.101 reg reg.local` use your appropriate IP for your Local registry VM (this one we just created)
-  - Add Insecure Registries setting to Docker Engine config (this allows use without HTTPS since is is only local)
+  - Add Insecure Registries setting to Docker Engine config (this allows use without HTTPS since it is only local)
     - Edit `/etc/docker/daemon.json` to add the following:
-    - `{`
-    - `  "insecure-registries" : ["reg.local:5000"]`
-    - `}`
+  ```json
+  {
+    "insecure-registries" : ["reg.local:5000"]
+  }
+  ```
     - Restart the Docker Engine service `systemctl restart docker`
 - Install Portainer-CE  
   - `docker pull portainer/portainer-ce:2.1.1`  
