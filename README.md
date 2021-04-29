@@ -81,7 +81,8 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
 - Edit /etc/hosts file adding `192.168.123.101 reg reg.local` (use IP address from Internal NIC on Local Registry VM created earlier)
 - Add Insecure Registries setting to Docker Engine config (this allows use without HTTPS since is is only local)
   - Edit `/etc/docker/daemon.json` to add the following:
-  - ```json
+  -
+```json
 {
   "insecure-registries" : ["reg.local:5000"]
 }
