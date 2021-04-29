@@ -57,7 +57,7 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
     - May need to expose port 8000... more on that later...
   - Login to the new local Portainer-CE web site:  
   - http://localhost:9000/  
-  - Create the admin account and password.
+  - Create the admin account and password. 
   - Click on the left button to confirm you have linked the /var/run/docker.sock
 
 ## Pull the required containers to your local registry
