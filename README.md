@@ -52,7 +52,7 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - `docker tag portainer/portainer-ce:2.1.1 reg.local:5000/portainer-ce:2.1.1`  
   - `docker push reg.local:5000/portainer-ce:2.1.1`  
   - `docker volume create portainer_data`  
-  - Portainer needs to be able to access the Docker socket to control and monitor the containers (maybe some day they will implement proper security, for now, selinux on CentOS and RHEL require the use of --privileged):  
+  - Portainer needs to be able to access the Docker socket to control and monitor the containers (https://danwalsh.livejournal.com/78373.html) (maybe some day they will implement proper security, for now, selinux on CentOS and RHEL require the use of --privileged):  
     - `docker run -d -p 9000:9000 --privileged --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data localhost:5000/portainer-ce:2.1.1`  
     - May need to expose port 8000... more on that later...
   - Login to the new local Portainer-CE web site:  
