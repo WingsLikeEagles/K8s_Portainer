@@ -81,9 +81,11 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
 - Edit /etc/hosts file adding `192.168.123.101 reg reg.local` (use IP address from Internal NIC on Local Registry VM created earlier)
 - Add Insecure Registries setting to Docker Engine config (this allows use without HTTPS since is is only local)
   - Edit `/etc/docker/daemon.json` to add the following:
-  - `{`
-  - `  "insecure-registries" : ["reg.local:5000"]`
-  - `}`
+```json
+{
+  "insecure-registries" : ["reg.local:5000"]
+}
+```
   - Restart the Docker Engine service `systemctl restart docker`
 - Pull the required containers to your Master Node from your local Registry VM
   - `docker pull reg.local:5000/centos/kubernetes-apiserver:latest`
@@ -93,17 +95,20 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
 - Add Services to /etc/systemd/system/ and enable them (still needs major work, these services assume K8s is installed locally on the host/VM which is not the case here)
   - Clone this repo to the Master VM (or copy these files another way)
-  - Copy files from this repo etc/systemd/system/kube-* to /etc/systemd/system/
+    - `git clone https://github.com/WingsLikeEagles/K8s_Portainer/`
+    - `cd K8s_Portainer`
+  - Copy services files from this repo to /etc/systemd/system/
+    - `cp etc/systemd/system/kube-* /etc/systemd/system/`
   - chown and chmod the files
-    - chown root:root /etc/systemd/system/kube-*
-    - chmod 755 /etc/systemd/system/kube-*
+    - `chown root:root /etc/systemd/system/kube-*`
+    - `chmod 755 /etc/systemd/system/kube-*`
   - Enable the services to start at boot
-    - systemctl enable kube-apiserver.service
-    - systemctl enable kube-controller-manager.service
-    - systemctl enable kube-scheduler.service
+    - `systemctl enable kube-apiserver.service`
+    - `systemctl enable kube-controller-manager.service`
+    - `systemctl enable kube-scheduler.service`
   - Start the services (this may need to happen later)
-    - systemctl start kube-apiserver.service
-    - systemctl start kube-controller-manager.service
-    - systemctl start kube-scheduler.service
+    - `systemctl start kube-apiserver.service`
+    - `systemctl start kube-controller-manager.service`
+    - `systemctl start kube-scheduler.service`
 
 - To Be Continued...
