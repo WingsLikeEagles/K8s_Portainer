@@ -3,7 +3,7 @@ Installing Kubernetes and using Portainer to interact.
 
 Hardware requirements:
 BLUF: 16 GB RAM and 8 cores  
-This is designed to be run on a single computer or laptop.  In order for this to work with several nodes the computer needs to have better than average resources.  Keep in mind, using VM's you only want to utilize about half of the system resources to leave resources for the host OS and hyervisor to work smoothly.  I recommend the following:  
+This is designed to be run on a single computer or laptop.  In order for this to work with several nodes the computer needs to have better than average resources.  Keep in mind, using VM's you only want to utilize about half of the system resources to leave resources for the host OS and hypervisor to work smoothly.  I recommend the following:  
 - RAM
   - In this design each node will consume 2 GB.  If you have a Master, and 2 worker nodes that is 6 GB.
   - 2 GB will be needed for the Portainer and local registry.
@@ -17,10 +17,10 @@ This is designed to be run on a single computer or laptop.  In order for this to
 - For an Air Gapped environment:
   - You will want a VM to run as a local registry for the docker containers for the Kubernetes nodes.
   - Requires at least 512 MB of RAM and one (1) CPU core (probably small enough to not impact system)
-  - Only required during intsallation or updates (can be shut down after)???
+  - Only required during installation or updates (can be shut down after)???
 
 ## Install VirtualBox
-The nodes will each run as a separate VM on the host.  VirtualBox (or VMWare Workstaion) is used to provide this capability.  
+The nodes will each run as a separate VM on the host.  VirtualBox (or VMWare Workstation) is used to provide this capability.  
 
 ## Download and install the base Linux OS for the nodes
 I am experimenting with CentOS Core.  Or CentOS Atomic.  
@@ -61,7 +61,7 @@ https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster
   - Click on the left button to confirm you have linked the /var/run/docker.sock
 
 ## Pull the required containers to your local registry
-- CentOS Atomic runs the Kebernetes Master node services as containers.  We need those images in our local registry!
+- CentOS Atomic runs the Kubernetes Master node services as containers.  We need those images in our local registry!
   - Based on https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster  
 - Kubernetes API Server
   - `docker pull registry.centos.org/centos/kubernetes-apiserver`
